@@ -7,6 +7,41 @@
 #include<math.h>
 #include<time.h>
 // ------------------------------------------------------------指针
+// const使用注意事项
+// 把const和非const数据的地址初始化为指向const的指针或为其赋值时合法的
+// 然而，非const数据的地址只能赋给普通指针
+// 如果，将const数据的地址赋给普通指针是非法的 error:
+// int main()
+// {
+//     double rates[5]={88.61,445.4,225.48,776.556,345.3};
+//     const double locked[4]={0.0388,0.01,0.06,0.0498};//const不允许更改数组元素内参数
+//     // double* pc=rates;
+//     const double* pc=rates;
+//     pc=locked;
+//     pc=&rates[3];
+// }
+// // 指针数组
+// void show(int* x,int y)
+// {
+//     for(int i = 0; i<y; i++)
+//     {
+//         printf("%d,%d,%p\n",i,x[i],x[i]);
+//     }
+// }
+// int main()
+// {
+//     int a[5]={15,23,44,55,65};
+//     int* b=a;
+//     int sz=sizeof(a)/sizeof(a[0]);
+//     for(int i=0;i<sz;i++)
+//     {
+//         printf("%d,%d,%p\n",i,b[i],b[i]);
+//     }
+//     // show(b,sz);
+//     system("pause");
+//     return 0;
+// }
+
 // 指针运算只作用于数组中，结果才是可以预测的
 // 非指向数组元素的指针执行算术运算都是非法的
 // int main(void)
