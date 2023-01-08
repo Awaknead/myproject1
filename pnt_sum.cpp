@@ -7,6 +7,87 @@
 #include<math.h>
 #include<time.h>
 // ------------------------------------------------------------指针
+
+//字符指针
+// ""在双引号内的是常量字符串无法修改
+// 1.使用字符数组变量 -配合指针使用   -char* p=arr; // 字符变量char arr[]="hello";
+// 2.使用常量字符串"" -配合指针使用   -char* p="hello";
+int main()
+{
+    // char* p= "hello";//"hello"是一个常量字符串  因该使用const关键字
+    const char* p= "hello world";
+    // *p = "hello world";//对象是const常量字符串无法修改
+    printf("%c\n",*p);//指向的是"hello"的字符串 - 首字符地址"h"的地址
+    printf("%s\n",p);//指向的是"hello"的字符串地址
+    // char arr[]="agbdg";//字符串数组
+    // char* p=arr;//字符串数组指针变量
+    // // *p = "hello world";//对象是const常量字符串无法修改
+    // // *p - 指向arr首元素地址 - 首元素地址内容就是字符串本身“agbdg”
+    // printf("%s\n",p);
+    // printf("%s\n",arr);
+    system("pause");
+    return 0;
+}
+
+// // 指针数组 - 数组 -存放指针的数组
+// // 整型数组 - 存放整型
+// // 字符数组 - 存放字符
+// // 指针数组 - 存放指针
+// int main()
+// {
+//     int a=10;
+//     int b=29;
+//     int c=40;
+//     // int arr[10]={1,2,3,4,...,9};//是一个整型数组
+//     int* arr1[3]={&a,&b,&c};//是一个存放整型指针的数组
+//     int sz=sizeof(arr1)/sizeof(arr1[0]);
+//     //访问指针数组中的值
+//     for(int i=0;i<sz;i++)
+//     {
+//         // *(arr[i])  - 解引用arr[i] - arr[0]=&a  
+//         printf("%d ",*(arr1[i]));
+//     }
+//     system("pause");
+//     return 0;
+// }
+
+// //二级指针
+// int main()
+// {
+//     int a=10;
+//     int* b=&a;//一级指针 int* b - *b(是一个指针变量)指向一个int类型
+//     int** p=&b;//二级指针 int** p - *p(是一个指针变量)指向一个int*类型
+//     int*** g=&p;//三级指针 int*** g - *g(是一个指针变量)指向一个int**类型
+//     //四级指针,五级指针...n级指针
+//     ***g=19;//可以直接修改a的值
+//     printf("%d\n",***g);//可以直接访问到a的值
+//     printf("%d",a);
+//     system("pause");
+//     return 0;
+// } 
+
+// // 地址-首元素地址不同使用方法
+// int main()
+// {
+//     // 相同都为arr首地址但加1的字节量是不一样的
+//     int arr[10]={0};
+//     //取地址arr - 为arr首地址arr[0]
+//     printf("%p\n",arr);
+//     //取地址arr+1 - 为arr首地址arr[0]元素加1 = arr[1]  加4字节
+//     printf("%p\n",arr+1);
+//     //取地址&arr[0] - arr首地址arr[0]
+//     printf("%p\n",&arr[0]);
+//     //取地址&arr[0]+1 - &arr[0]元素加1 = &arr[1]   加4字节
+//     printf("%p\n",&arr[0]+1);
+//     //取地址&arr - 为arr首地址arr[0]
+//     printf("%p\n",&arr);
+//     //取地址&arr+1 - 为arr整个数组全部地址加相同元素的数组地址
+//     // 0x00df0 +1  = 0x00e18   跨越40个字节
+//     printf("%p\n",&arr+1);
+//     system("pause");
+//     return 0;
+// }
+
 //多维数组和指针
 // int main()
 // {
@@ -38,24 +119,38 @@
 //     pc=locked;
 //     pc=&rates[3];
 // }
-// // 指针数组
-// void show(int* x,int y)
-// {
-//     for(int i = 0; i<y; i++)
-//     {
-//         printf("%d,%d,%p\n",i,x[i],x[i]);
-//     }
-// }
+
+// // 数组指针 - 指针
+// // void show(int* x,int y)
+// // {
+// //     for(int i = 0; i<y; i++)
+// //     {
+// //         printf("%d,%d,%p\n",i,x[i],x[i]);
+// //     }
+// // }
 // int main()
 // {
-//     int a[5]={15,23,44,55,65};
-//     int* b=a;
-//     int sz=sizeof(a)/sizeof(a[0]);
-//     for(int i=0;i<sz;i++)
+//     int arr[10] = {0};
+//     int* b=arr; //指针存放数组首元素的地址
+//     int sz=sizeof(arr)/sizeof(arr[0]);
+//     for(int i=0; i<sz; i++)
 //     {
-//         printf("%d,%d,%p\n",i,b[i],b[i]);
+//         // 使用指针解引用访问数组下标并赋值
+//         *(b+i)=i;
 //     }
-//     // show(b,sz);
+//     for(int i=0; i<sz; i++)
+//     {
+//         // printf("%d ",arr[i]);  //直接访问数组下标
+//         printf("%d  ",*(b+i));  //使用指针解引用访问数组下标
+//     }
+//     // int a[5]={15,23,44,55,65};
+//     // int* b=a;
+//     // int sz=sizeof(a)/sizeof(a[0]);
+//     // for(int i=0;i<sz;i++)
+//     // {
+//     //     printf("%d,%d,%p\n",i,b[i],b[i]);
+//     // }
+//     // // show(b,sz);
 //     system("pause");
 //     return 0;
 // }
@@ -240,17 +335,14 @@
 //     // int* p    *p能够访问4个字节
 //     // char* p   *p能够访问1个字节
 //     // double* p *p能够访问8个字节
-
 //     printf("%p\n",p);
 //     printf("%p\n",p+1);
-
 //     printf("%p\n",pa);
 //     printf("%p\n",pa+1);
 //     // 指针类型决定：指针走一步走多远（指针的不长）
 //     // int* p;   p+1-->4字节
 //     // char* p;  p+1-->1字节
 //     // double* p; p+1-->8字节
-
 //     system("pause");
 //     return 0;
 // }
