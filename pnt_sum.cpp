@@ -7,27 +7,46 @@
 #include<math.h>
 #include<time.h>
 // ------------------------------------------------------------指针
+// // 笔试题
+// int main()
+// {
+//     char arr1[]="abcdef";
+//     char arr2[]="abcdef";
+//     const char* p1="abcdef";
+//     const char* p2="abcdef";
+//     // if(p1 == p2) //"abcdef"都是常量字符串所以内存只分配了一个内存空间地址
+//     if(arr1 == arr2) //arr1 和 arr2是两个字符串数组所以分配了两个内存空间地址
+//     {
+//         printf("hhehe\n");
+//     }
+//     else
+//     {
+//         printf("haha\n");
+//     }
+//     system("pause");
+//     return 0;
+// }
 
 //字符指针
 // ""在双引号内的是常量字符串无法修改
 // 1.使用字符数组变量 -配合指针使用   -char* p=arr; // 字符变量char arr[]="hello";
 // 2.使用常量字符串"" -配合指针使用   -char* p="hello";
-int main()
-{
-    // char* p= "hello";//"hello"是一个常量字符串  因该使用const关键字
-    const char* p= "hello world";
-    // *p = "hello world";//对象是const常量字符串无法修改
-    printf("%c\n",*p);//指向的是"hello"的字符串 - 首字符地址"h"的地址
-    printf("%s\n",p);//指向的是"hello"的字符串地址
-    // char arr[]="agbdg";//字符串数组
-    // char* p=arr;//字符串数组指针变量
-    // // *p = "hello world";//对象是const常量字符串无法修改
-    // // *p - 指向arr首元素地址 - 首元素地址内容就是字符串本身“agbdg”
-    // printf("%s\n",p);
-    // printf("%s\n",arr);
-    system("pause");
-    return 0;
-}
+// int main()
+// {
+//     char* p= "hello";//"hello"是一个常量字符串  因该使用const关键字
+//     const char* p= "hello world";//这是正确的写法
+//     // *p = 'g';//对象是const常量字符串无法修改
+//     printf("%c\n",*p);//指向的是"hello"的字符串 - 首字符地址"h"的地址
+//     printf("%s\n",p);//指向的是"hello"的字符串地址
+//     // char arr[]="agbdg";//字符串数组
+//     // char* p=arr;//字符串数组指针变量
+//     // // *p = "hello world";//对象是const常量字符串无法修改
+//     // // *p - 指向arr首元素地址 - 首元素地址内容就是字符串本身“agbdg”
+//     // printf("%s\n",p);
+//     // printf("%s\n",arr);
+//     system("pause");
+//     return 0;
+// }
 
 // // 指针数组 - 数组 -存放指针的数组
 // // 整型数组 - 存放整型
@@ -35,18 +54,50 @@ int main()
 // // 指针数组 - 存放指针
 // int main()
 // {
-//     int a=10;
-//     int b=29;
-//     int c=40;
-//     // int arr[10]={1,2,3,4,...,9};//是一个整型数组
-//     int* arr1[3]={&a,&b,&c};//是一个存放整型指针的数组
-//     int sz=sizeof(arr1)/sizeof(arr1[0]);
-//     //访问指针数组中的值
-//     for(int i=0;i<sz;i++)
+//     // 指针数组的用法
+//     int arr1[]={1,2,3,4,5};  //-
+//     int arr2[]={2,3,4,5,6};  //-   //数组
+//     int arr3[]={3,4,5,6,7};  //-
+//     int* parr[]={arr1,arr2,arr3};//指针数组
+//     int sz1=sizeof(parr)/sizeof(parr[0]);
+//     int sz2=sizeof(arr1)/sizeof(arr1[0]);
+//     // for嵌套
+//     // 外for提取指针数组parr 包含的各数组首地址
+//     for(int i=0;i<sz1;i++)
 //     {
-//         // *(arr[i])  - 解引用arr[i] - arr[0]=&a  
-//         printf("%d ",*(arr1[i]));
+//         // 内for打印arr1,2,3数组首地址内的元素j下标内的值
+//         for(int j=0;j<sz2;j++)
+//         {
+//             // parr[i] - 指针数组中的各个数组首元素地址
+//             // +j - 各个数组首元素地址下标增加
+//             // * - 解引用
+//             // *(parr[i]+j) - 解引用指针数组各个数组首元素地址下标j位置
+//             printf("%d ",*(parr[i]+j));
+//         }
+//         printf("\n");
 //     }
+//     // int a=10;
+//     // int b=29;
+//     // int c=40;
+//     // // int arr[10]={1,2,3,4,...,9};//是一个整型数组
+//     // int* arr1[3]={&a,&b,&c};//是一个存放整型指针的数组
+//     // int sz=sizeof(arr1)/sizeof(arr1[0]);
+//     // //访问指针数组中的值
+//     // for(int i=0;i<sz;i++)
+//     // {
+//     //     // *(arr[i])  - 解引用arr[i] - arr[0]=&a  
+//     //     printf("%d ",*(arr1[i]));
+//     // }    
+//     // char aa='a';
+//     // char bb='b';
+//     // char cc='c';   
+//     // char* pp[3]={&aa,&bb,&cc};
+//     // int sz1=sizeof(pp)/sizeof(pp[0]);
+//     // for(int i=0;i<sz;i++)
+//     // {
+//     //     // *(arr[i])  - 解引用arr[i] - arr[0]=&a  
+//     //     printf("%c ",*(pp[i]));
+//     // }       
 //     system("pause");
 //     return 0;
 // }
