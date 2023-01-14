@@ -8,6 +8,59 @@
 #include<time.h>
 // ------------------------------------------------------------指针
 
+/* // 数组和指针(二维)传参
+void test (int arr[3][5])//1.和数组完全一样的写法
+{}
+void test1(int arr[][5])//2.二维数组只能行可以省略,但必须知道一行有多少个元素
+{}
+// void test2(int arr[3][])// error:二维数组只显示行，不显示列（非法代码）
+// {}
+// void test3(int arr[][])// error:
+// {}
+void test4(int(*arr)[])
+{}
+int main()
+{
+    int arr[3][5]={0};
+    test(arr);//二维数组传参
+    test1(arr);
+    // test2(arr);
+    // test3(arr);
+    test4(arr);
+    system("pause");
+    return 0;
+} */
+
+/* // 数组和指针(一维)传参
+// 数组在传参的时候可以传数组也可以是指针
+// 传数组的时候要注意数组大小可以省略
+// 传指针的时候要注意要使用合理的指针类型
+// int arr[10]; = 使用指针 int *arr  整型数组 - 首元素整型的地址 - 放在整型指针里
+// int* arr1[10]; = 使用指针 int* *arr  指针数组 -首元素指针的地址 - 可以放在二级指针里
+// void test (int arr[])
+// {printf("%p",arr);}
+// void test(int arr[10])
+// {printf("%p",arr);}
+void test(int* arr)
+{printf("%p",arr);}
+// void test1(int* arr1[20])
+// {printf("%p",arr1);}
+void test1(int**arr1)
+{printf("%p",arr1);}
+int main(void)
+{
+    int arr[10]={0};
+    int* arr1[20]={0};
+    printf("%p",arr);
+    test(arr);
+    printf("\n");
+    printf("%p",arr1);
+    test1(arr1);
+    system("pause");
+    return 0;
+}
+ */
+
 // int arr[5];//arr是一个有5个元素的整型数组 
 // int* parr1[10];//parr1是一个数组 ，数组有10个元素，每个元素类型都是int*，parr1是指针数组
 // int(*parr2)[10];//parr2是一个指针，该指针指向一个数组，数组有10个元素，每个元素类型都是int,parr2是数组指针
