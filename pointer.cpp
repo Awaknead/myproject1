@@ -8,6 +8,55 @@
 #include<time.h>
 // ------------------------------------------------------------指针
 
+/* // 函数指针 -是指向函数的指针 -存放函数地址的一个指针
+// int testadd(int x,int y)
+// {
+//     int z=0;
+//     z=x+y;
+//     return z;
+// }
+// void testchar(const char*str)
+// {
+//     printf("%s\n",str);
+// }
+int main()
+{
+    // int a=10;
+    // int b=20;
+    // // int arr[10]={0};//数组
+    // // int (*pa)[10]=&arr;//指针数组
+    // // printf("%d \n",testadd(a,b));
+    // //&函数名 和 函数名 都是函数的地址
+    // // printf("%p\n",testadd);
+    // // printf("%p\n",&testadd);
+    // 整型(int)
+    // int (*pg)(int,int)=testadd;//函数指针  (*pg)-指针  (int,int)-参数类型  int-返回类型
+    // printf("%d\n",(*pg)(a,b)); //函数指针调用  (*pg)(int[变量名或常量],int[变量名或常量])
+    // 字符(char)
+    // void (*pa)(const char*)=testchar;//函数指针  (*pa)-指针   (const char*)-参数类型  void-返回类型
+    // (*pa)("hello world!");//函数指针调用  (*pa)(const char*[常量字符串])
+    system("pause");
+    return 0;
+} */
+
+// // 指针如何传参
+// void test(char** aa)
+// {}
+// void test1(char** aa)
+// {}
+// void test2(char** aa)
+// {}
+// int main()
+// {
+//     char c='w';
+//     char* p=&c;
+//     char** qq=&p;
+//     char* arr[10];
+//     test(&p);  //实参(指针地址)  - 形参(可用二级指针)
+//     test1(qq); //实参(二级指针本身) -形参(可用二级指针)
+//     test2(arr);//实参(指针数组名(一级指针的地址)) -形参(可用二级指针)
+// }
+
 /* // 数组和指针(二维)传参
 void test (int arr[3][5])//1.和数组完全一样的写法
 {}
@@ -66,7 +115,7 @@ int main(void)
 // int(*parr2)[10];//parr2是一个指针，该指针指向一个数组，数组有10个元素，每个元素类型都是int,parr2是数组指针
 // int(*parr3[10])[5];//parr3是一个数组，该数组有10个元素，每个元素是一个数组指针，该数组指针指向的数组有5个元素，每个元素是int
 
-/* // 数组指针
+/* // 数组指针 -是指向数组的指针
 void print(int (*p)[5],int x,int y)
 // 函数行参数组指针(类型 指针变量名(数组指针首元素地址) 元素个数,类型 边界，类型 边界)
 // 二维数组指针在传参时
