@@ -6,9 +6,83 @@
 #include<stdbool.h>
 #include<math.h>
 #include<time.h>
-// ------------------------------------------------------------指针
+// ------------------------------------------------------------指针 
 
-/* // 函数指针 -是指向函数的指针 -存放函数地址的一个指针
+// 练习
+char* my_strcpy (char* dest,const char* src);
+int main()
+{
+    // 1.函数指针
+    char*(*pf)(char*,const char*)=my_strcpy;
+    // 2.函数指针数组
+    char*(*pfArr[4])(char*,const char*)={my_strcpy,my_strcpy,my_strcpy,my_strcpy};
+}
+
+/* int Add(int x,int y)
+{return x+y;}
+int Sud(int x,int y)
+{return x-y;}
+int Mul(int x,int y)
+{return x*y;}
+int Div(int x,int y)
+{return x/y;}
+//函数指针数组 -将相同类型的函数地址放在一个数组里
+int main()
+{
+    //指针(一级指针)
+    int*aa;
+    //指针数组
+    int* a[5];
+    //数组指针
+    int(*b)[5];
+    //函数指针
+    // 需要一个数组，这个数组可以存放n个函数的地址 - 函数指针数组
+    // int(*c)(int,int)=add;//sud,mul,div
+    int(*arr[4])(int,int)={Add,Sud,Mul,Div};//  arr[4]->函数指针数组  ->类型 int(*)(int ,int )
+    for(int i=0;i<4;i++)
+    {
+        printf("%d\n",arr[i](3,4));// arr[i](3,4) 函数调用
+    }
+    system("pause");
+    return 0;
+}  */
+
+/*
+int main()
+{
+    int a=10;
+    int b=20;
+    int(*pa)(int,int)=testadd;
+    // 函数指针-都可以使用
+    printf("%d\n",pa(a,b));     //30
+    printf("%d\n",testadd(a,b));//30
+    printf("%d\n",(*pa)(a,b));  //30
+    // //error  -printf("%d\n",*pa(a,b));
+    // printf("%d\n",(**pa)(a,b));
+    // printf("%d\n",(***pa)(a,b));
+    system("pause");
+    return 0;
+}  */
+
+/*// typedef void(*pfun_t)(int);   //这是定义void(*)(int)    -重新命名为 pfun_t(函数的定义写法)
+// // typedef unsigned int uint; //这是定义unsigned int    -重命名为 uint
+// // typedef short int sint;
+// pfun_t singal(int,pfun_t);  //函数声明
+ // 函数指针 -是指向函数的指针 -存放函数地址的一个指针
+// 函数指针 - 
+// 举例      void (*       signal(int,   void(*)(int)   )      )(int)   //不容易被读者理解
+// 分解 1.   void (*                                           )(int)
+// 分解 2.                 signal(int,   void (*)(int)  )
+// 分解 3.                               void (*)(int)
+分解 1  和  分解 3  -  都是void(*)(int)  ->  函数指针类型  -参数int -返回值void
+// 简化    
+// pfun_t singal(int,pfun_t);  //函数声明
+// 笔试考--
+// void (*signal(int,void(*)(int)))(int)
+// 解释函数含义
+// 1.signal是一个函数声明
+// 2.signal函数的参数有两个，第一个是int类型，第二个是函数指针，该函数指针指向的函数的参数是int，返回类型是void
+// 3.signal函数的返回类型也是一个函数指针：该函数指针指向的函数的参数是int，返回类型是void
 // int testadd(int x,int y)
 // {
 //     int z=0;
