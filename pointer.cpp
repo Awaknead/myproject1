@@ -7,8 +7,10 @@
 #include<math.h>
 #include<time.h>
 // ------------------------------------------------------------指针 
+// 函数指针数组 - 计算器
+// 查看calc_pointer.cpp
 
-// 练习
+/* // 练习
 char* my_strcpy (char* dest,const char* src);
 int main()
 {
@@ -16,7 +18,7 @@ int main()
     char*(*pf)(char*,const char*)=my_strcpy;
     // 2.函数指针数组
     char*(*pfArr[4])(char*,const char*)={my_strcpy,my_strcpy,my_strcpy,my_strcpy};
-}
+} */
 
 /* int Add(int x,int y)
 {return x+y;}
