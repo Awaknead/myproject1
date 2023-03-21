@@ -7,6 +7,58 @@
 #include<math.h>
 #include<time.h>
 // ----------------------------------------------------------指针(qsort快速排序)
+// ------------------------------------------------------------结构体
+/*  // struct (结构体)
+ strct 结构体名称{
+    char a;
+    int b;     //结构体a,b,c  皆为结构体成员变量(结构体内容)
+    double c;
+} 
+struct stu
+{
+    char name[20];
+    int age;
+};
+// void qsort(void*base,
+//            size_t num,
+//            size_t width,
+//            int (* cmp)(const void *e1,const void *e2)
+//            );
+int cmp_int(const void *a,const void *b)
+{
+    //两数比较
+      return *(int*)a-*(int*)b;
+}
+int cmp_float(const void *e1, const void *e2)
+{
+    if(*(float*)e1  == *(float*)e2)
+       return 0;
+    else if(*(float*)e1 > *(float*)e2)
+            return 1;
+    else
+        return -1;
+}
+void test1()
+{
+    int arr[]={9,8,7,1,2,3,4,5,6};
+    int sz=sizeof(arr)/sizeof(arr[0]);
+    qsort(arr,sz,sizeof(arr[0]),cmp_int);
+    for(int i=0;i<sz;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+}
+
+void test2()
+{
+    float f[]={1.2,3.2,4.2,2.2,9.3,5.6,8.2,2.1,3.0};
+    int sz=sizeof(f)/sizeof(f[0]);
+    qsort(f,sz,sizeof(f[0]),cmp_float);
+    for(int i=0;i<sz;i++)
+    {
+        printf("%.2f ",f[i]);
+    }
+} */
 // 结构体声明
    struct stu 
    {
@@ -14,6 +66,7 @@
        char name[20];
        int age;
    };
+/* 
 //    int cmp_stu(const void*e1,const void*e2)
 //    {
 //     //   -> 访问结构体指针成员
@@ -42,10 +95,74 @@
       {
         printf("s[%d]  name=%s  age=%d.\n",x,s[x].name,s[x].age);
       }
-   }
+   } */
+
+// swap交换元素
+void swap(char* e1,char*e2,int width)
+{
+    for(int x=0;x<width;x++)
+    {
+        int temp=*e1;
+        *e1=*e2;
+        *e2=temp;
+        *e1++;
+        *e2++;
+    }
+}
+//    自创快速排序函数(qsort)
+void test_qsort(void* base,int sz,int width,int (*cmp)(void* e1,void* e2))
+{
+    // 趟数
+    for(int i=0;i<sz-1;i++)
+    {
+        // 一趟比较的对数
+        for(int j=0;j<sz-1-i;j++)
+        {
+            //两个比较的元素
+            if(cmp((char*)base+j*width,(char*)base+(j+1)*width) > 0 )
+            {
+                // 交换
+                swap((char*)base+j*width,(char*)base+(j+1)*width,width);
+            }
+            
+        }
+    }
+}
+int cmp_int (void* e1,void* e2)
+{
+    return *((int*)e1) - *((int*)e2);
+}
+int cmp_stu_age(void* e1,void* e2)
+{
+    return (((struct stu*)e1)->age) -(((struct stu*)e2)->age);
+}
+void test4()
+{
+    //整型 
+    int arr[]={9,8,7,1,2,3,4,5,6};
+    int sz=sizeof(arr)/sizeof(arr[0]);
+    test_qsort(arr,sz,sizeof(arr[0]),cmp_int);
+    for(int x=0;x<sz;x++)
+      {
+         printf("arr[%d]=%d\n",x,arr[x]);
+      }
+}
+void test5()
+{
+    //结构体
+    struct stu s[3]={{"zhangsan",39},{"lisi",22},{"wangwu",40}};
+    int sz=sizeof(s)/sizeof(s[0]); 
+    test_qsort(s,sz,sizeof(s[0]),cmp_stu_age);
+    for(int x=0;x<sz;x++)
+      {
+        printf("s[%d]  name=%s  age=%d.\n",x,s[x].name,s[x].age);
+      }
+}
    int main(void)
    {
-      test1();
+      test4();
+      putchar('\n');
+      test5();
       system("pause");
       return 0;
    }
