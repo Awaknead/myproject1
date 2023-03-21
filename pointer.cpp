@@ -6,7 +6,107 @@
 #include<stdbool.h>
 #include<math.h>
 #include<time.h>
-// ------------------------------------------------------------指针 
+// ----------------------------------------------------------指针(qsort快速排序)
+// 结构体声明
+   struct stu 
+   {
+    // 结构体
+       char name[20];
+       int age;
+   };
+//    int cmp_stu(const void*e1,const void*e2)
+//    {
+//     //   -> 访问结构体指针成员
+//        return ((struct stu*)e1)->age - ((struct stu*)e2)->age;
+//    }
+   int cmp_stu(const void*e1,const void*e2)
+   {
+    // 比较字符串
+    // 不能直接使用><=来比较，应该用strcmp（字符串比较函数）函数
+    return strcmp(((struct stu*)e1)->name , ((struct stu*)e2)->name);
+   }
+   void test1( )
+   {
+    // 结构体定义
+      struct stu s[3]={{"zhangsan",39},{"lisi",22},{"wangwu",40}};
+    //   结构体计算元素个数
+      int sz=sizeof(s)/sizeof(s[0]);
+    //   结构体qsort快速排序
+      qsort(s,sz,sizeof(s[0]),cmp_stu);
+    //   第一个参数：待排序数组的首元素地址
+    // 第二个参数：待排序数组的元素个数
+    // 第三个参数：待排序数组的每个元素的大小-单位字节
+    // 第四个参数：是函数指针，比较两个元素的所用函数的地址-这个函数使用者自己实现
+                //   函数指针的两个参数是：带比较的两个元素的地址
+      for(int x=0;x<sz;x++)
+      {
+        printf("s[%d]  name=%s  age=%d.\n",x,s[x].name,s[x].age);
+      }
+   }
+   int main(void)
+   {
+      test1();
+      system("pause");
+      return 0;
+   }
+/* char** fizzBuzz(int n,int *returnsize)
+{
+    char** answer=(char**)malloc(sizeof(char*)*n);
+    //malloc分配内存空间大小char**里有n个char*
+    char* arr=(char*)malloc(sizeof(char)*n*9);
+    //malloc分配内存空间大小char*里有n个char类型元素个数是9个
+    *returnsize=n;
+    for(int j=0;j<n;j++)
+    {
+        answer[j]=&arr[9*j];
+    }
+    for(int j=0;j<=n;j++)
+    {
+        if(j%3 ==0 && j%5 ==0)
+        {
+            strcpy(answer[j-1],"FizzBuzz");
+        }
+        else if(j%3 ==0)
+        {
+            strcpy(answer[j-1],"Fizz");
+        }
+        else if(j%5 ==0)
+        {
+            strcpy(answer[j-1],"Buzz");
+        }
+        else
+        {
+            sprintf(answer[j-1],"%d",j);
+        }
+        printf("answer[%d]=%s",j,answer[j-1]);
+    }
+    return answer;
+}
+int main(void)
+{
+    char** args;//接收
+    int a=3;      //输出数字
+    int* size;  
+    args =fizzBuzz(a,size);
+    return 0;
+} */
+
+/* // 指向函数指针数组的指针
+int main()
+{
+    int arr[10]={0};
+    int(*p)[10]=&arr; //数组指针
+
+    int (*pfarr[4])(int ,int );//函数指针数组
+    int (*(*ppfarr)[4])(int ,int )=&pfarr;
+    // ppfarr是一个数组指针，指针指向的数组有4 个元素
+    // 指向的数组的每个元素的类型是一个函数指针int(*)(int ,int )
+
+} */
+
+// 回调函数  - 是一个通过函数指针调用的函数
+// 查看calc_pointer.cpp
+
 // 函数指针数组 - 计算器
 // 查看calc_pointer.cpp
 

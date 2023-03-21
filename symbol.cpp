@@ -1,3 +1,23 @@
+// 网络安全需要学习内容
+// 1.计算机语言
+//    1.1 c/c++    就可以知道如何应对计算机环境中较低级别操作的攻击
+//    1.2 Python   可以帮助识别漏洞并发现如何修复他们
+//    1.3 Javascript 可以了解到网站和其他应用程序如何工作的概念，以及用来抵御恶意用户的最佳设计
+//    1.4 PHP      知道如何抵御网页入侵者
+//    1.5 SQL      SQL注入攻击涉及利用SQL漏洞窃取或修改数据库中保存的数据
+// 2.局域网组网技术
+// 3.网络管理的基本原理和操作方法
+// 4.网络系统的性能测试和优化技术
+// 5.网站渗透
+// 6.服务漏洞扫描
+// 7.程序漏洞分析检测
+// 8.计算机应用
+// 9.漏洞利用
+// 10.漏洞修复
+// 11.代码审计
+// 12.安全脚本编写
+// 13.SRC挖洞
+// 14.入侵和攻击分析追踪
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -6,6 +26,111 @@
 #include<stdbool.h>
 #include<math.h>
 #include<time.h>
+// --------------------------------------------------------回调函数
+/* int add(int x,int y)
+{
+    return x + y;
+}
+void print(int (*pf)(int ,int ))
+{
+    int x,y;
+    printf("enter two value:\n");
+    scanf("%d%d",&x,&y);
+    printf("%d\n",pf(x,y));//调用add函数将x,y作为实参
+}
+int main(void)
+{
+    print(add);//函数调用函数将add函数作为print函数的实参传递
+    system("pause");
+    return 0; 
+} */
+
+// ------------------------------------------------------------结构体
+/* // struct (结构体)
+ strct 结构体名称{
+    char a;
+    int b;     //结构体a,b,c  皆为结构体成员变量(结构体内容)
+    double c;
+} 
+struct stu
+{
+    char name[20];
+    int age;
+};
+// void qsort(void*base,
+//            size_t num,
+//            size_t width,
+//            int (* cmp)(const void *e1,const void *e2)
+//            );
+int cmp_int(const void *a,const void *b)
+{
+    //两数比较
+      return *(int*)a-*(int*)b;
+}
+int cmp_float(const void *e1, const void *e2)
+{
+    if(*(float*)e1  == *(float*)e2)
+       return 0;
+    else if(*(float*)e1 > *(float*)e2)
+            return 1;
+    else
+        return -1;
+}
+void test1()
+{
+    int arr[]={9,8,7,1,2,3,4,5,6};
+    int sz=sizeof(arr)/sizeof(arr[0]);
+    qsort(arr,sz,sizeof(arr[0]),cmp_int);
+    for(int i=0;i<sz;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+}
+
+void test2()
+{
+    float f[]={1.2,3.2,4.2,2.2,9.3,5.6,8.2,2.1,3.0};
+    int sz=sizeof(f)/sizeof(f[0]);
+    qsort(f,sz,sizeof(f[0]),cmp_float);
+    for(int i=0;i<sz;i++)
+    {
+        printf("%.2f ",f[i]);
+    }
+}
+//--------------------------------------------------------指向函数指针数组的指针
+int add(int x,int y)
+{
+    return x+y;
+}
+
+int main(void)
+{
+
+    struct stu s[3]={{"zhangyan",18},{"jingyang",19},{"xigua",39}};
+    test1();
+    putchar('\n');
+    test2();
+    int arr[6]={0};
+    int(*pf)[6]=&arr;
+    int (*pd[4])(int ,int )=add;//pd 是一个函数指针的数组 
+    int (*(*ppd)[4])(int ,int )=&pd;
+    //ppd 是一个数组指针  指针指向的数组有4个元素
+    // ppd 是一个指向函数指针 int(* (*ppd)[4])(int ,int )
+    // 数组                        (*ppd)[4]
+    // 的指针                      (*ppd)
+
+    
+    
+    // int i=10;
+    // void* c=&i;
+    //void* 类型指针 可以接受任意类型的地址
+    //void* 类型指针 不能进行解引用操作
+    //void* 类型指针 不能进行加减运算
+    // *c=0;
+    system("pause");
+    return 0;
+} */
+
 // ------------------------------------------------------------符号
 
 // 操作符从大到小排序优先级
