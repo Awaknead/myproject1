@@ -6,6 +6,27 @@
 #include<stdbool.h>
 #include<math.h>
 #include<time.h>
+int main()
+{
+    //数组名是首元素地址
+    //1.sizeof(数组名) - 数组名表示整个数组
+    //2.&数组名 - 数组名表示整个数组
+    int a[]={1,2,3,4,5};//4*4=16
+    printf("%d\n",sizeof(a));   //16-sizeof(数组名)-计算数组总大小
+    printf("%d\n",sizeof(a+0)); //4/8-数组名表示首元素-a+0还是首元素地址，地址大小4/8
+    printf("%d\n",sizeof(*a));  //4-数组名表示首元素地址-*a就是首元素
+    printf("%d\n",sizeof(a+1)); //4/8-数组名表示首元素地址-a+1就是第二个元素地址-地址大小4/8
+    printf("%d\n",sizeof(a[1]));//4-表示第二个元素大小
+    printf("%d\n",sizeof(&a));  //4/8-&a取出的是数组的地址，那也是地址，地址的大小4/8
+    printf("%d\n",sizeof(*&a)); //16-&a数组的地址，数组的地址解引用访问数组，sizeof计算数组的大小
+    printf("%d\n",sizeof(&a+1));//4/8-&a数组的地址，&a+1跳过了整个数组的地址，后面的那个地址的大小4/8
+    printf("%d\n",sizeof(&a[0]));//4/8-第一个元素的地址
+    printf("%d\n",sizeof(&a[0]+1));//4/8-第二个元素的的地址
+
+    char arr[]={'a', 'b', 'c', 'd', 'e', 'f'};
+    system("pause");
+    return 0;
+}
 // ----------------------------------------------------------指针(qsort快速排序)
 // ------------------------------------------------------------结构体
 /*  // struct (结构体)
@@ -59,7 +80,7 @@ void test2()
         printf("%.2f ",f[i]);
     }
 } */
-// 结构体声明
+/* // 结构体声明
    struct stu 
    {
     // 结构体
@@ -95,7 +116,7 @@ void test2()
       {
         printf("s[%d]  name=%s  age=%d.\n",x,s[x].name,s[x].age);
       }
-   } */
+   } 
 
 // swap交换元素
 void swap(char* e1,char*e2,int width)
@@ -165,7 +186,7 @@ void test5()
       test5();
       system("pause");
       return 0;
-   }
+   } */
 /* char** fizzBuzz(int n,int *returnsize)
 {
     char** answer=(char**)malloc(sizeof(char*)*n);
