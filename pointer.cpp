@@ -11,19 +11,35 @@ int main()
     //数组名是首元素地址
     //1.sizeof(数组名) - 数组名表示整个数组
     //2.&数组名 - 数组名表示整个数组
-    int a[]={1,2,3,4,5};//4*4=16
-    printf("%d\n",sizeof(a));   //16-sizeof(数组名)-计算数组总大小
+    int a[]={1,2,3,4,5};//5*4=20  
+    printf("%d\n",sizeof(a));   //20-sizeof(数组名)-计算数组总大小
     printf("%d\n",sizeof(a+0)); //4/8-数组名表示首元素-a+0还是首元素地址，地址大小4/8
     printf("%d\n",sizeof(*a));  //4-数组名表示首元素地址-*a就是首元素
     printf("%d\n",sizeof(a+1)); //4/8-数组名表示首元素地址-a+1就是第二个元素地址-地址大小4/8
     printf("%d\n",sizeof(a[1]));//4-表示第二个元素大小
     printf("%d\n",sizeof(&a));  //4/8-&a取出的是数组的地址，那也是地址，地址的大小4/8
-    printf("%d\n",sizeof(*&a)); //16-&a数组的地址，数组的地址解引用访问数组，sizeof计算数组的大小
+    printf("%d\n",sizeof(*&a)); //20-&a数组的地址，数组的地址解引用访问数组，sizeof计算数组的大小
     printf("%d\n",sizeof(&a+1));//4/8-&a数组的地址，&a+1跳过了整个数组的地址，后面的那个地址的大小4/8
     printf("%d\n",sizeof(&a[0]));//4/8-第一个元素的地址
     printf("%d\n",sizeof(&a[0]+1));//4/8-第二个元素的的地址
-
+    putchar('\n');
     char arr[]={'a', 'b', 'c', 'd', 'e', 'f'};
+    printf("%d\n",sizeof(arr));    //6 计算数组的大小
+    printf("%d\n",sizeof(arr+0));  //4、8 首元素地址
+    printf("%d\n",sizeof(*arr));   //1 首元素地址解引用 首元素
+    printf("%d\n",sizeof(arr[1])); //1 第二个元素
+    printf("%d\n",sizeof(&arr));   //4.8 数组的地址
+    printf("%d\n",sizeof(&arr+1));//4.8  数组的地址+1 跳过一个数组后的地址
+    printf("%d\n",sizeof(&arr[0]+1));//4.8 数组的第二个元素地址 
+    putchar('\n');
+    // strlen  计算字符串长度 -'\0'
+    printf("%d\n",strlen(arr));       //随机值
+    printf("%d\n",strlen(arr+0));     //随机值
+    // printf("%d\n",strlen(*arr));   //error
+    // printf("%d\n",strlen(arr[1])); //error
+    // printf("%d\n",strlen(&arr));   //随机值
+    // printf("%d\n",strlen(&arr+1)); //随机值-6
+    printf("%d\n",strlen(&arr[0]+1)); //随机值-1
     system("pause");
     return 0;
 }
