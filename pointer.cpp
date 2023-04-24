@@ -40,6 +40,19 @@ int main()
     // printf("%d\n",strlen(&arr));   //随机值
     // printf("%d\n",strlen(&arr+1)); //随机值-6
     printf("%d\n",strlen(&arr[0]+1)); //随机值-1
+
+    putchar('\n');
+    char arr1[]={"abcdef"};   //机器储存的时"abcdef\0"
+    printf("%d\n",sizeof(arr1));    // 7 -数组的大小
+    printf("%d\n",sizeof(arr1+0));  // 4.8 -首元素的地址+0  还是地址
+    printf("%d\n",sizeof(*arr1));   // 1 -首元素地址解引用  首元素
+    printf("%d\n",sizeof(arr1[1])); // 1 -数组第二个元素
+    printf("%d\n",sizeof(&arr1));   // 4.8 -取数组的地址
+    printf("%d\n",sizeof(&arr1+1)); // 4.8 -取数组的地址后+1 还是地址
+    printf("%d\n",sizeof(&arr1[0]+1)); // 4.8 -取数组第二元素地址 还是地址
+
+    putchar('\n');
+    printf("%d\n",strlen(arr1));
     system("pause");
     return 0;
 }
