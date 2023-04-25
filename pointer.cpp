@@ -23,7 +23,7 @@ int main()
     printf("%d\n",sizeof(&a[0]));//4/8-第一个元素的地址
     printf("%d\n",sizeof(&a[0]+1));//4/8-第二个元素的的地址
     putchar('\n');
-    char arr[]={'a', 'b', 'c', 'd', 'e', 'f'};
+    char arr[]={'a', 'b', 'c', 'd', 'e', 'f'};//机器储存 "a,b,c,d,e,f"
     printf("%d\n",sizeof(arr));    //6 计算数组的大小
     printf("%d\n",sizeof(arr+0));  //4、8 首元素地址
     printf("%d\n",sizeof(*arr));   //1 首元素地址解引用 首元素
@@ -52,7 +52,32 @@ int main()
     printf("%d\n",sizeof(&arr1[0]+1)); // 4.8 -取数组第二元素地址 还是地址
 
     putchar('\n');
-    printf("%d\n",strlen(arr1));
+    printf("%d\n",strlen(arr1));    //6 -数组大小
+    printf("%d\n",strlen(arr1+0));  //6 -首元素地址 往后寻找'\0'
+    // printf("%d\n",strlen(*arr1));  //error -非法访问内存
+    // printf("%d\n",strlen(arr1[1])); //error -非法访问内存
+    // printf("%d\n",strlen(&arr1));   //&arr -数组的地址-使用数组指针 char(*p)[7] =&arr1;
+    // printf("%d\n",strlen(&arr1+1));  //&arr -数组的地址+1 -跳过一个数组-使用数组指针 char(*p)[7] =&arr1;
+    printf("%d\n",strlen(&arr1[0]+1));  //5 -第二个元素的地址往后寻找'\0'
+
+    putchar('\n');
+    char *p="abcdef";  //机器储存 "abcdef\0" 常量字符串  指针存放的时a字符的地址不是存放abcdef
+    printf("%d\n",sizeof(p));//4/8  计算指针变量p地址的大小
+    printf("%d\n",sizeof(p+1));//4/8 p+1得到的时字符b的地址
+    printf("%d\n",sizeof(*p));//1  解引用p -得到字符串第一个字符
+    printf("%d\n",sizeof(p[0]));//1 得到的时字符串第一个字符p[0] == *(p+0)
+    printf("%d\n",sizeof(&p));//4/8
+    printf("%d\n",sizeof(&p+1));//4/8
+    printf("%d\n",sizeof(&p[0]+1));//4/8
+    putchar('\n');
+    printf("%d\n",strlen(p));
+    printf("%d\n",strlen(p+1));
+    // printf("%d\n",strlen(*p));//err
+    // printf("%d\n",strlen(p[0]));//err
+    // printf("%d\n",strlen(&p));// 随机值 取地址p  和字符串地址没有直接联系
+    // printf("%d\n",strlen(&p+1));//随机值 取地址p+1 时跳过p的地址后面一个地址
+    printf("%d\n",strlen(&p[0]+1));//5 取地址p[0]->指向字符串第一个字符+1第二个字符 计算
+
     system("pause");
     return 0;
 }
