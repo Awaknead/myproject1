@@ -66,17 +66,32 @@ int main()
     printf("%d\n",sizeof(p+1));//4/8 p+1得到的时字符b的地址
     printf("%d\n",sizeof(*p));//1  解引用p -得到字符串第一个字符
     printf("%d\n",sizeof(p[0]));//1 得到的时字符串第一个字符p[0] == *(p+0)
-    printf("%d\n",sizeof(&p));//4/8
-    printf("%d\n",sizeof(&p+1));//4/8
-    printf("%d\n",sizeof(&p[0]+1));//4/8
+    printf("%d\n",sizeof(&p));//4/8 地址
+    printf("%d\n",sizeof(&p+1));//4/8 地址
+    printf("%d\n",sizeof(&p[0]+1));//4/8  地址
     putchar('\n');
-    printf("%d\n",strlen(p));
-    printf("%d\n",strlen(p+1));
+
+    printf("%d\n",strlen(p)); //6 
+    printf("%d\n",strlen(p+1)); //5
     // printf("%d\n",strlen(*p));//err
     // printf("%d\n",strlen(p[0]));//err
     // printf("%d\n",strlen(&p));// 随机值 取地址p  和字符串地址没有直接联系
     // printf("%d\n",strlen(&p+1));//随机值 取地址p+1 时跳过p的地址后面一个地址
     printf("%d\n",strlen(&p[0]+1));//5 取地址p[0]->指向字符串第一个字符+1第二个字符 计算
+    putchar('\n');
+    
+    int a[3][4]={0}; //二维数组  由三个一维数组a[0],a[1],a[2]每个一维数组都有4个元素组成
+    printf("%d\n",sizeof(a));// 48 -3个一维数组*4每个一维数组4个元素*4一个元素4个字节 3*4*4
+    printf("%d\n",sizeof(a[0][0]));// 4 一维数组a[0] 第[0]个元素
+    printf("%d\n",sizeof(a[0]));  //16  sizeof(数组名-a[0]) 计算整个数组4*4
+    printf("%d\n",sizeof(a[0]+1)); //4 a[0]首元素地址+1 a[0]一维数组的二个元素
+    printf("%d\n",sizeof(*(a[0]+1)));
+    printf("%d\n",sizeof(a+1));
+    printf("%d\n",sizeof(*(a+1)));
+    printf("%d\n",sizeof(&a[0]+1));
+    printf("%d\n",sizeof(*(&a[0]+1)));
+    printf("%d\n",sizeof(*a));
+    printf("%d\n",sizeof(a[3]));
 
     system("pause");
     return 0;
