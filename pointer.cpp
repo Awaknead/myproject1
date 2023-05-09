@@ -11,6 +11,7 @@ int main()
     //数组名是首元素地址
     //1.sizeof(数组名) - 数组名表示整个数组
     //2.&数组名 - 数组名表示整个数组
+    //3.除此之外所有的数组名都表示受首元素的地址
     int a[]={1,2,3,4,5};//5*4=20  
     printf("%d\n",sizeof(a));   //20-sizeof(数组名)-计算数组总大小
     printf("%d\n",sizeof(a+0)); //4/8-数组名表示首元素-a+0还是首元素地址，地址大小4/8
@@ -61,7 +62,7 @@ int main()
     printf("%d\n",strlen(&arr1[0]+1));  //5 -第二个元素的地址往后寻找'\0'
 
     putchar('\n');
-    char *p="abcdef";  //机器储存 "abcdef\0" 常量字符串  指针存放的时a字符的地址不是存放abcdef
+    const char* p="abcdef";  //机器储存 "abcdef\0" 常量字符串  指针存放的时a字符的地址不是存放abcdef
     printf("%d\n",sizeof(p));//4/8  计算指针变量p地址的大小
     printf("%d\n",sizeof(p+1));//4/8 p+1得到的时字符b的地址
     printf("%d\n",sizeof(*p));//1  解引用p -得到字符串第一个字符
@@ -80,19 +81,49 @@ int main()
     printf("%d\n",strlen(&p[0]+1));//5 取地址p[0]->指向字符串第一个字符+1第二个字符 计算
     putchar('\n');
     
-    int a[3][4]={0}; //二维数组  由三个一维数组a[0],a[1],a[2]每个一维数组都有4个元素组成
-    printf("%d\n",sizeof(a));// 48 -3个一维数组*4每个一维数组4个元素*4一个元素4个字节 3*4*4
-    printf("%d\n",sizeof(a[0][0]));// 4 一维数组a[0] 第[0]个元素
-    printf("%d\n",sizeof(a[0]));  //16  sizeof(数组名-a[0]) 计算整个数组4*4
-    printf("%d\n",sizeof(a[0]+1)); //4 a[0]首元素地址+1 a[0]一维数组的二个元素
-    printf("%d\n",sizeof(*(a[0]+1)));
-    printf("%d\n",sizeof(a+1));
-    printf("%d\n",sizeof(*(a+1)));
-    printf("%d\n",sizeof(&a[0]+1));
-    printf("%d\n",sizeof(*(&a[0]+1)));
-    printf("%d\n",sizeof(*a));
-    printf("%d\n",sizeof(a[3]));
+    int a2[3][4]={0}; //二维数组  由三个一维数组a[0],a[1],a[2]每个一维数组都有4个元素组成
+    printf("%d\n",sizeof(a2));// 48 -3个一维数组*4每个一维数组4个元素*4一个元素4个字节 3*4*4
+    // printf("%d\n",sizeof(a[0][0]));// 4 一维数组a[0] 第[0]个元素
+    printf("%d\n",sizeof(a2[0]));  //16  sizeof(数组名-a[0]) 计算整个数组4*4
+    printf("%d\n",sizeof(a2[0]+1)); //4.8 a[0]此时是首元素地址+1 a[0]一维数组的第二个元素的地址
+    // printf("%d\n",sizeof(*(a[0]+1)));//4 第一行第二个元素地址 解引用
+    printf("%d\n",sizeof(a2+1));//4.8 a此时是二维数组的首元素地址a[0]  +1就是a[1]第二行地址   
+    printf("%d\n",sizeof(*(a2+1)));//16 二维数组a[1]  解引用 -整个数组
+    printf("%d\n",sizeof(&a2[0]+1));//4.8 取a[0]地址是第一行整个数组 +1 -第二行a[1]地址
+    printf("%d\n",sizeof(*(&a2[0]+1)));//16 计算第二行的数组大小
+    printf("%d\n",sizeof(*a2));//16 a是二维数组名 a解引用-二维数组首元素a[0]
+    printf("%d\n",sizeof(a2[3]));//16 sizeof(表达式不参与真实运算)a[3]不会真的访问数组  a[3][4]的类型是int和a[0][4]l类型一样
+    putchar('\n');
+    int a1[5]={1,2,3,4,5};
+    int* ptr=(int*)(&a1+1);//&a1取的是整个a1数组  &a1+1是跳过整个数组后一位 int 是数组指针类型强制转换int*
+    printf("%d.%d\n",*(a1+1),*(ptr-1));//2,5
+    putchar('\n');
 
+    char* c[]={"ENTER","NEW","POINT","FIRST"};
+    char** cp[]={c+3,c+2,c+1,c};//c没有取地址&，没有单独放在sizeof中，所以是数组首元素地址
+    char*** cpp=cp;//整个数组地址存放在cpp指针中
+    /* 
+       三级指针     二级指针     一级指针 
+       cpp            cp          c
+       char***-->   c + 3       ENTER
+                    c + 2        NEW  
+                    c + 1       POINT
+                      c         FIRST
+                      |   
+                         0 1 2 3 4
+        cp[0]   c+3  ==  F I R S T 
+        cp[1]   c+2  ==  P O I N T        .
+        cp[2]   c+1  ==  N E W            .
+        cp[3]    c   ==  E N T E R
+    */
+    printf("%s\n",**++cpp); //POINT
+    //++cpp优先(cpp[1])>*解引用找到一维数组(c)地址>*解引用地址>POINT 
+    printf("%s\n",*--*++cpp + 3);//ER
+    //++cpp(cpp[2])>解引用找到一维数组(c)地址>c地址-->*解引用地址"ENTER">+3将字符串首地址向后偏移3位>ER
+    printf("%s\n",*cpp[-2]+3);//ST
+    //cpp[-2]=>*(cpp+(-2))>现在cpp地址(cpp[2])=>cpp[0]>*解引用找到一维数组(c)地址>*解引用地址"FIRST">+3将字符串向后偏移3位>ST
+    printf("%s\n",cpp[-1][-1]+1);//EW
+    //cpp[-1]=>*(cpp+(-1))>现在cpp地址(cpp[2])=>cpp[1]>*解引用找到一维数组(c)地址c[2]>[-1]=>*(*(cpp[1])-1)c地址-1现在地址c[1]>*解引用c[1]"NEW">+1将字符串向后偏移1位>EW
     system("pause");
     return 0;
 }
