@@ -4,10 +4,34 @@
 #include<windows.h>
 #include<time.h>
 //随机号码--单色号
+//元素交换
+void cmp(int* a, int* b)
+{
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+
+//快速排序数组
+void sort(int* p,int sz)
+{
+    for(int x=0;x<sz-2;x++)//一趟
+    {
+        for(int y=0;y<sz-2-x;y++)
+        {
+            if(p[y] > p[y+1])
+            {  
+                //交换元素（升序）
+                cmp(&p[y],&p[y+1]);
+            }
+        }
+    }
+}
 void excel ()
 {
     int status1,test1;
     int arr[7]={0};
+    int sz=sizeof(arr)/sizeof(arr[0]);
     for(int i=0; i<6; i++)//总的打印行数 
     {
         srand(time(NULL));
@@ -34,6 +58,8 @@ void excel ()
             }
         }
         Sleep(rand()%1060+5);
+        //冒泡排序
+        sort(arr,sz);//传递实参数组，元素个数
         arr[6]= rand() %10+6;//单独蓝号
         for(int y=0;y<7;y++)
         {
